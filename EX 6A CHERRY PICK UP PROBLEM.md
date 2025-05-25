@@ -14,24 +14,56 @@ When passing through a path cell containing a cherry, you pick it up, and the ce
 
 
 ## Algorithm
-1. 
-2. 
-3. 
-4.  
-5.   
+1. Initialize 3D DP `dp[row][col1][col2]` for max cherries collected by two robots.
+2. Set base case: robots start at top row, columns 0 and last.
+3. Iterate row-wise, updating DP for all robot position pairs.
+4. Calculate cherries picked, avoiding double counting.
+5. Update DP using previous row’s valid moves `(col1 ± 1, col2 ± 1)`.
+6. Return max cherries when robots reach the last row.
 
 ## Program:
 ```
-/*
 To implement the program for Cherry pickup problem.
-
-
-Developed by: 
-Register Number:  
-*/
+Developed by: R Guruprasad
+Register Number: 212222240033
+```
+```py
+class Solution:
+    def cherryPickup(self, grid):
+        n = len(grid)
+        self.maxx=0
+        def cp1(row,col,arr,cc):
+            if row<0 or row>=len(arr[0]) or col<0 or col>=len(arr[0]) or arr[row][col]==-1:
+                return 
+            if row==len(arr)-1 and col==len(arr[0])-1:
+                helper(row,col,arr,cc)
+                
+            cherry=arr[row][col]
+            arr[row][col]=0
+            cp1(row,col+1,arr,cc+cherry)
+            cp1(row+1,col,arr,cc+cherry)
+            arr[row][col]=cherry
+        def helper(row,col,arr,cc):
+            if row<0 or row>=len(arr[0]) or col<0 or col>=len(arr[0]) or arr[row][col]==-1:
+                return 
+            if row==0 and col==0:
+                self.maxx=max(self.maxx,cc)
+                return 
+            cherry=arr[row][col]
+            arr[row][col]=0
+            helper(row,col-1,arr,cc+cherry)
+            helper(row-1,col,arr,cc+cherry)
+            arr[row][col]=cherry
+        cp1(0,0,grid,0)
+        return self.maxx
+        
+obj=Solution()
+grid=[[0,1,-1],[1,0,-1],[1,1,1]]        
+print(obj.cherryPickup(grid))
 ```
 
 ## Output:
+![image](https://github.com/user-attachments/assets/0dfeecd9-016d-4553-98c3-199d6c290535)
 
 
 
