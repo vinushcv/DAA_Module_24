@@ -18,8 +18,8 @@ To Solve Travelling Sales man Problem for the following graph.
 ## Program:
 ```
 To implement the program for TSP.
-Developed by: R Guruprasad 
-Register Number: 212222240033
+Developed by: Vinush CV 
+Register Number: 212222230176
 ```
 ```py
 from sys import maxsize
